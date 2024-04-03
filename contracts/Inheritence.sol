@@ -47,6 +47,21 @@ contract Inheritance {
         lastWithdrawal = block.timestamp;
     }
 
+    function designateNewHeir(address _newHeir) public onlyHeir {
+        require(
+            block.timestamp - lastWithdrawal > 30 days,
+            "The withdrawal period has not expired."
+        );
+        require(_newHeir != address(0), "New heir cannot be the zero address.");
+        require(_newHeir != owner, "New heir cannot be the current owner.");
+        require(_newHeir != heir, "New heir cannot be the current heir.");
+
+        owner = heir;
+        heir = _newHeir;
+        emit OwnershipTransferred(owner, heir);
+        emit HeirChanged(heir, _newHeir);
+    }
+
     receive() external payable {
         emit FundsReceived(msg.sender, msg.value);
     }
