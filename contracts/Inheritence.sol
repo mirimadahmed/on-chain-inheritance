@@ -23,6 +23,16 @@ contract Inheritance {
         lastWithdrawal = block.timestamp;
     }
 
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function.");
+        _;
+    }
+
+    modifier onlyHeir() {
+        require(msg.sender == heir, "Only the heir can call this function.");
+        _;
+    }
+
     receive() external payable {
         emit FundsReceived(msg.sender, msg.value);
     }
