@@ -33,6 +33,20 @@ contract Inheritance {
         _;
     }
 
+    function withdraw(uint256 _amount) public onlyOwner {
+        require(
+            address(this).balance >= _amount,
+            "Insufficient balance in contract."
+        );
+
+        if (_amount > 0) {
+            (bool sent, ) = payable(owner).call{value: _amount}("");
+            require(sent, "Failed to send Ether");
+            emit Withdrawal(msg.sender, _amount);
+        }
+        lastWithdrawal = block.timestamp;
+    }
+
     receive() external payable {
         emit FundsReceived(msg.sender, msg.value);
     }
