@@ -1,0 +1,15 @@
+{
+  "name": "onchain-inheritence",
+  "version": "1.0.0",
+  "description": "## Description The Inheritance Smart Contract is a blockchain-based solution implemented with solidity, designed to automate the process of transferring digital assets to an heir if the original owner does not perform a withdrawal within a specified period. The contract is developed in Solidity and is intended for deployment on the any Ethereum based networks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.2"
+  }
+}
