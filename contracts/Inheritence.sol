@@ -15,6 +15,9 @@ contract Inheritance {
     event FundsReceived(address indexed from, uint256 amount);
 
     constructor(address _heir) {
+        require(_heir != address(0), "Heir cannot be the zero address.");
+        require(_heir != msg.sender, "Heir cannot be the owner.");
+        
         owner = msg.sender;
         heir = _heir;
         lastWithdrawal = block.timestamp;
