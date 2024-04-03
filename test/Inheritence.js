@@ -79,6 +79,21 @@ describe("Inheritance Smart Contract", function () {
         .withArgs(owner.address, parseEther("0.5"));
     });
   });
+
+  describe("Inheritance", function () {
+    it("Should transfer ownership if the owner does not withdraw for more than 1 month", async function () {
+      const { heir, newHeir, inheritance } = await loadFixture(deployInheritanceContract);
+
+      // Move time forward to simulate 1 month of inactivity
+      await time.increase(32 * 24 * 60 * 60);
+      
+
+      // Heir checks inheritance and should be able to claim ownership
+      await inheritance.connect(heir).designateNewHeir(newHeir.address);
+      expect(await inheritance.owner()).to.equal(heir.address);
+      expect(await inheritance.heir()).to.equal(newHeir.address);
+    });
+  });
 });
 
 
